@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Hyunstagram</string>
-    <string name="facebook_app_id">873009302900995</string>
-    <string name="fb_login_protocol_scheme">fb873009302900995</string>
+    <string name="facebook_app_id">791694331791861</string>
+    <string name="fb_login_protocol_scheme">fb791694331791861</string>
 
     <!-- Sign In -->
     <string name="email">Email</string>
