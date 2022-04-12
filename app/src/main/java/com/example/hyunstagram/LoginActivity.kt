@@ -60,6 +60,13 @@ class LoginActivity : AppCompatActivity() {
 //        printHashKey()
         callbackManager = CallbackManager.Factory.create()
     }
+
+    override fun onStart() {
+        super.onStart()
+        moveMainPage(auth?.currentUser)
+    }
+
+
 //    fun printHashKey() {
 //        // 페이스북 해시 값 가져오는 함수
 //        try {
@@ -188,6 +195,7 @@ class LoginActivity : AppCompatActivity() {
     fun moveMainPage(user: FirebaseUser?){
         if(user != null){
             startActivity(Intent(this, MainActivity::class.java))
+            finish()
         }
     }
 }
