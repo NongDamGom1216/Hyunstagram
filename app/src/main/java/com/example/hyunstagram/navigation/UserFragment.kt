@@ -18,6 +18,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.hyunstagram.LoginActivity
 import com.example.hyunstagram.MainActivity
 import com.example.hyunstagram.R
+import com.example.hyunstagram.navigation.model.AlarmDTO
 import com.example.hyunstagram.navigation.model.ContentDTO
 import com.example.hyunstagram.navigation.model.FollowDTO
 import com.google.firebase.auth.FirebaseAuth
@@ -144,7 +145,7 @@ class UserFragment : Fragment(){
                 followDTO = FollowDTO()
                 followDTO!!.followerCount = 1
                 followDTO!!.followers[currentUserid!!] = true
-//                followerAlarm(uid!!)
+                followerAlarm(uid!!)
                 transaction.set(tsDocFollower,followDTO!!)
                 return@runTransaction
             }
@@ -157,13 +158,22 @@ class UserFragment : Fragment(){
                 //It add my follower when I don't follow a third person
                 followDTO!!.followerCount = followDTO!!.followerCount + 1
                 followDTO!!.followers[currentUserid!!] = true
-//                followerAlarm(uid!!)
+                followerAlarm(uid!!)
             }
             transaction.set(tsDocFollower,followDTO!!)
             return@runTransaction
         }
     }
 
+    fun followerAlarm(destinationUid : String){
+        var alarmDTO = AlarmDTO()
+        alarmDTO.destinationUid = destinationUid
+        alarmDTO.userId = auth?.currentUser?.email
+        alarmDTO.uid = auth?.currentUser?.uid
+        alarmDTO.kind = 2
+        alarmDTO.timestamp = System.currentTimeMillis()
+        FirebaseFirestore.getInstance().collection("alarms").document().set(alarmDTO)
+    }
 
 
     //프로필로 올린 이미지를 받는 함수
