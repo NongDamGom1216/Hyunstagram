@@ -7,19 +7,21 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="100dp">
+
         <ImageView
             android:id="@+id/account_iv_profile"
-            android:layout_alignParentLeft="true"
-            android:src="@drawable/ic_account"
             android:layout_width="100dp"
-            android:layout_height="100dp"/>
+            android:layout_height="100dp"
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/ic_account" />
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/account_btn_follow_signout"
-            android:text="@string/follow"
-            android:layout_toRightOf="@+id/account_iv_profile"
-            android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
-            android:layout_height="40dp"/>
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/account_iv_profile"
+            android:text="@string/follow" />
         <LinearLayout
             android:gravity="center"
             android:layout_toRightOf="@+id/account_iv_profile"

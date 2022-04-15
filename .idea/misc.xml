@@ -13,7 +13,7 @@
         <entry key="app/src/main/res/layout/fragment_user.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_comment.xml" value="0.19610507246376813" />
         <entry key="app/src/main/res/layout/item_detail.xml" value="0.165" />
-        <entry key="app/src/main/res/menu/bottom_navigation_main.xml" value="0.1" />
+        <entry key="app/src/main/res/menu/bottom_navigation_main.xml" value="0.25" />
       </map>
     </option>
   </component>
