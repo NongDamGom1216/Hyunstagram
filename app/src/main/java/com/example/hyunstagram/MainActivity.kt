@@ -16,6 +16,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.iid.FirebaseInstanceIdReceiver
+import com.google.firebase.iid.internal.FirebaseInstanceIdInternal
+import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.UploadTask
 import kotlinx.android.synthetic.main.activity_main.*
@@ -32,7 +35,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
         bottom_navigation.setOnNavigationItemSelectedListener(this)
         ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 1)
-
+        registerPushToken()
         //set default screen
         bottom_navigation.selectedItemId = R.id.action_home
     }
@@ -80,6 +83,20 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         toolbar_username.visibility = View.GONE
         toolbar_btn_back.visibility = View.GONE
 
+    }
+
+    fun registerPushToken(){
+        FirebaseMessaging.getInstance().token.addOnCompleteListener {
+                task ->
+            if(task != null) {
+                val token = task.result
+                val uid = FirebaseAuth.getInstance().currentUser?.uid
+                val map = mutableMapOf<String, Any>()
+                map["pushToken"] = token!!
+
+                FirebaseFirestore.getInstance().collection("pushtokens").document(uid!!).set(map)
+            }
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
